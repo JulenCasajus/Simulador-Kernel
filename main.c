@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
     printf("Capacidad inicial de la cola de procesos: %d\n", capacidad);
     printf("Cola dinamica: %s\n", cola_dinamica ? "Sí" : "No");
     printf("Mostrar ciclos del reloj: %s\n", clock_visible ? "Sí" : "No");
-    printf("Ciclos por interrupcion del timer: %d (%d ciclos)\n", t_periodo, t_periodo*10);
+    printf("Ciclos por interrupcion del timer: %d\n", t_periodo);
     printf("Mostrar interrupciones del timer: %s\n", timer_visible ? "Sí" : "No");
     printf("Mostrar el manejo de memoria: %s\n", memoria_visible ? "Sí" : "No");
     printf("Mostrar el manejo del scheduler: %s\n", scheduler_visible ? "Sí" : "No");
