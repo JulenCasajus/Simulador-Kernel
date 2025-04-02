@@ -91,26 +91,25 @@ void encolar_proceso(PCB *pcb) {
     }
 }
 
-// Función para desencolar un proceso de la cola
+// Función para desencolar procesos terminados de la cola
 void desencolar_procesos() {
     int pos = pQ.cara;
-    int i = 0;
-    while (i < pQ.num_procesos) {
-        if (pQ.procesos[(pos + i) % pQ.capacidad] != NULL && pQ.procesos[(pos + i) % pQ.capacidad]->estado == 2) {
-            if (i == 0) {
-                pQ.cara = (pQ.cara + 1) % pQ.capacidad;
-                i++;
-            } else {
-                for (int j = i; j < pQ.num_procesos - 1; j++) {
-                    pQ.procesos[(pos + j) % pQ.capacidad] = pQ.procesos[(pos + j + 1) % pQ.capacidad];
-                }
-            }
-            pQ.num_procesos--;
-            pQ.procesos[(pos + pQ.num_procesos) % pQ.capacidad] = NULL;
-        } else {
-            i++;
+
+    // Recorremos todos los procesos en la cola
+    for (int i = 0; i < pQ.num_procesos; i++) {
+        // Obtener la posición en la cola circular
+        int idx = (pQ.cara + i) % pQ.capacidad;
+
+        // Si el proceso no está terminado, mantenerlo en la cola
+        if (pQ.procesos[idx] != NULL && pQ.procesos[idx]->estado != 2) {
+            // Reubicar el proceso en la nueva posición
+            pQ.procesos[pos] = pQ.procesos[idx];
+            pos = (pos + 1) % pQ.capacidad;
         }
     }
+    // Actualizar los punteros de la cola
+    pQ.culo = pos;
+    pQ.num_procesos = (pos - pQ.cara + pQ.capacidad) % pQ.capacidad;
 }
 
 // Devuelve el siguiente proceso READY

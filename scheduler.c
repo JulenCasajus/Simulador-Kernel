@@ -36,7 +36,7 @@ void reducir_t_vida_procesos() {
                             hilo->pcb = NULL;
                         }
                     }
-                    if (scheduler_visible) {
+                    if (scheduler_visible && hilo->pcb != NULL) {
                         printf("Hilo %d que ejecuta proceso pid = %d, nuevo t_vida: %d\n", hilo->id_hilo, hilo->pcb->pid, hilo->pcb->t_vida);
                     }
                 }
